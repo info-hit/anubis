@@ -26,8 +26,8 @@ RUN npm run assets \
 
 FROM gcr.io/distroless/static-debian12:nonroot
 
-COPY --from=build --chown=1000:1000 /out/anubis /anubis
+COPY --from=build --chown=1000:1000 /out/anubis /usr/local/bin/anubis
 
 USER 1000:1000
 
-ENTRYPOINT ["/anubis"]
+ENTRYPOINT ["/usr/local/bin/anubis"]
