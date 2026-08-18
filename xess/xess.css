@@ -1,29 +1,21 @@
 :root {
-  --body-sans-font: Geist, sans-serif;
+  --body-sans-font: Geist, Arial, sans-serif;
   --body-preformatted-font: Iosevka Curly Iaso, monospace;
-  --body-title-font: Podkova, serif;
+  --body-title-font: Geist, Arial, sans-serif;
 
-  --background: #1d2021;
-  --text: #f9f5d7;
-  --text-selection: #d3869b;
-  --preformatted-background: #3c3836;
-  --link-foreground: #b16286;
-  --link-background: #282828;
-  --blockquote-border-left: 1px solid #bdae93;
+  --background: #f7f8f5;
+  --surface: #ffffff;
+  --text: #212a34;
+  --muted: #66757d;
+  --line: #dce4e1;
+  --text-selection: #aee32d;
+  --preformatted-background: #f0f4f2;
+  --link-foreground: #027f9d;
+  --link-background: transparent;
+  --blockquote-border-left: 2px solid #aee32d;
 
-  --progress-bar-outline: #b16286 solid 4px;
-  --progress-bar-fill: #b16286;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f9f5d7;
-    --text: #1d2021;
-    --text-selection: #d3869b;
-    --preformatted-background: #ebdbb2;
-    --link-foreground: #b16286;
-    --link-background: #fbf1c7;
-    --blockquote-border-left: 1px solid #655c54;
-  }
+  --progress-bar-outline: #027f9d solid 1px;
+  --progress-bar-fill: #027f9d;
 }
 
 @font-face {
@@ -49,84 +41,190 @@
   src: url("./static/iosevka-curly.woff2") format("woff2");
 }
 
-main {
-  font-family: var(--body-sans-font);
-  max-width: 50rem;
-  padding: 2rem;
-  margin: auto;
+* {
+  box-sizing: border-box;
 }
 
 ::selection {
   background: var(--text-selection);
-}
-
-body {
-  background: var(--background);
   color: var(--text);
 }
 
-body,
 html {
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  background: var(--background);
+  min-height: 100%;
+}
+
+body {
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
+  background: var(--background);
+  color: var(--text);
+  display: flex;
+  font-family: var(--body-sans-font);
+  justify-content: center;
+  line-height: 1.55;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}
+
+body::before,
+body::after {
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  z-index: -1;
+}
+
+body::before {
+  height: 32rem;
+  right: -15rem;
+  top: -14rem;
+  width: 32rem;
+}
+
+body::after {
+  bottom: -20rem;
+  height: 38rem;
+  left: -21rem;
+  width: 38rem;
+}
+
+main {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top: 6px solid #aee32d;
+  margin: 1.5rem;
+  max-width: 44rem;
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  position: relative;
+  width: calc(100% - 3rem);
 }
 
 .centered-div {
   text-align: center;
 }
 
-#status {
-  font-variant-numeric: tabular-nums;
+.challenge-brand {
+  align-items: center;
+  display: flex;
+  font-size: 1.05rem;
+  font-weight: 700;
+  gap: 0.65rem;
+  letter-spacing: -0.03em;
 }
 
-.centered-div {
+.challenge-brand__logo {
+  display: block;
+  height: auto;
+  width: clamp(8.5rem, 22vw, 11rem);
+}
+
+.challenge-main {
+  margin: clamp(2.5rem, 8vw, 5rem) auto 0;
+  max-width: 33rem;
+}
+
+#title {
+  font-family: var(--body-title-font);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+  margin: 0;
   text-align: center;
 }
 
-#status {
+.challenge-content {
+  margin: 2rem auto 0;
+}
+
+.challenge-mascot {
+  height: 1px !important;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 1px !important;
+}
+
+#status,
+#anubis-script-error {
+  color: var(--muted);
+  font-size: 0.95rem;
   font-variant-numeric: tabular-nums;
+  margin: 0 auto;
+  max-width: 30rem;
+}
+
+#anubis-script-error {
+  color: #96000d;
+  font-weight: 700;
 }
 
 #progress {
+  background: #edf3f1;
+  border-radius: 0;
   display: none;
-  width: min(20rem, 90%);
-  height: 2rem;
-  border-radius: 1rem;
-  overflow: hidden;
-  margin: 1rem 0 2rem;
-  outline-offset: 2px;
+  height: 0.65rem;
+  margin: 1.5rem auto 2.5rem;
   outline: var(--progress-bar-outline);
+  outline-offset: 3px;
+  overflow: hidden;
+  width: min(20rem, 88%);
 }
 
 .bar-inner {
   background-color: var(--progress-bar-fill);
   height: 100%;
-  width: 0;
   transition: width 0.25s ease-in;
+  width: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .bar-inner {
-    transition: width 0.25s ease-in;
-  }
+.challenge-details {
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.86rem;
+  margin: 2.5rem auto 0;
+  max-width: 33rem;
+  padding-top: 1rem;
+  text-align: left;
+}
+
+.challenge-details summary {
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+  list-style-position: outside;
+}
+
+.challenge-details p {
+  margin: 0.8rem 0 0;
+}
+
+.challenge-legal {
+  color: var(--muted);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  margin-top: 2.5rem;
+  text-align: center;
 }
 
 pre {
   background-color: var(--preformatted-background);
-  padding: 1em;
   border: 0;
   font-family: var(--body-preformatted-font);
+  padding: 1em;
 }
 
 a,
 a:active,
 a:visited {
-  color: var(--link-foreground);
   background-color: var(--link-background);
+  color: var(--link-foreground);
+  text-underline-offset: 0.15em;
 }
 
 h1,
@@ -134,8 +232,8 @@ h2,
 h3,
 h4,
 h5 {
-  margin-bottom: 0.1rem;
   font-family: var(--body-title-font);
+  margin-bottom: 0.1rem;
 }
 
 blockquote {
@@ -144,6 +242,25 @@ blockquote {
   padding: 0.5em 10px;
 }
 
-footer {
-  text-align: center;
+@media (max-width: 36rem) {
+  body {
+    align-items: flex-start;
+  }
+
+  main {
+    margin: 1rem;
+    padding: 1.4rem;
+    width: calc(100% - 2rem);
+  }
+
+  .challenge-main {
+    margin-top: 3rem;
+  }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar-inner {
+    transition: none;
+  }
 }

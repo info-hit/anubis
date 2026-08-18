@@ -20,44 +20,6 @@ templ base(title string, body templ.Component, impressum *config.Impressum, hone
 			for key, value := range ogTags {
 				<meta property={ key } content={ value }/>
 			}
-			<style>
-        body,
-        html {
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .centered-div {
-            text-align: center;
-        }
-
-        #status {
-            font-variant-numeric: tabular-nums;
-        }
-
-        #progress {
-            display: none;
-            width: 90%;
-            width: min(20rem, 90%);
-            height: 2rem;
-            border-radius: 1rem;
-            overflow: hidden;
-            margin: 1rem 0 2rem;
-            outline-offset: 2px;
-            outline: #b16286 solid 4px;
-        }
-
-        .bar-inner {
-            background-color: #b16286;
-            height: 100%;
-            width: 0;
-            transition: width 0.25s ease-in;
-        }
-    	</style>
 			@templ.JSONScript("anubis_version", anubis.Version)
 			@templ.JSONScript("anubis_challenge", challenge)
 			@templ.JSONScript("anubis_base_prefix", anubis.BasePrefix)
@@ -67,26 +29,20 @@ templ base(title string, body templ.Component, impressum *config.Impressum, hone
 			if honeypot != nil && honeypot.Enabled {
 				@honeypotLink(anubis.BasePrefix + fmt.Sprintf("%shoneypot/%s/init", anubis.APIPrefix, uuid.NewString()))
 			}
-			<main>
-				<h1 id="title" class="centered-div">{ title }</h1>
-				@body
-				<footer>
-					<div class="centered-div">
-						<p>
-							{ localizer.T("protected_by") } <a href="https://github.com/TecharoHQ/anubis">Anubis</a> { localizer.T("protected_from") } <a
-	href="https://techaro.lol"
->Techaro</a>. { localizer.T("made_with") }.
-						</p>
-						<p>{ localizer.T("mascot_design") } <a href="https://bsky.app/profile/celphase.bsky.social">{ localizer.T("celphase") }</a>.</p>
-						if impressum != nil {
-							<p>
-								@templ.Raw(impressum.Footer)
-								-- <a href={ templ.SafeURL(anubis.BasePrefix + fmt.Sprintf("%simprint", anubis.APIPrefix)) }>Imprint</a>
-							</p>
-						}
-						<p>{ localizer.T("version_info") } <code>{ anubis.Version }</code>.</p>
-					</div>
-				</footer>
+			<main class="challenge-shell">
+				<header class="challenge-brand" aria-label="ИнфоХит">
+					<img class="challenge-brand__logo" src={ anubis.BasePrefix + "/.within.website/x/cmd/anubis/static/img/infohit-logo.svg?cacheBuster=" + anubis.Version } alt="ИнфоХит"/>
+				</header>
+				<div class="challenge-main">
+					<h1 id="title">{ title }</h1>
+					@body
+				</div>
+				if impressum != nil {
+					<footer class="challenge-legal">
+						@templ.Raw(impressum.Footer)
+						-- <a href={ templ.SafeURL(anubis.BasePrefix + fmt.Sprintf("%simprint", anubis.APIPrefix)) }>Imprint</a>
+					</footer>
+				}
 			</main>
 		</body>
 	</html>

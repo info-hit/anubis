@@ -228,10 +228,10 @@ interface OhNoesParams {
       container.style.height = "2rem";
       container.style.borderRadius = "1rem";
       container.style.cursor = "pointer";
-      container.style.background = "#b16286";
+      container.style.background = "var(--progress-bar-fill)";
       container.style.color = "white";
       container.style.fontWeight = "bold";
-      container.style.outline = "4px solid #b16286";
+      container.style.outline = "var(--progress-bar-outline)";
       container.style.outlineOffset = "2px";
       container.style.width = "min(20rem, 90%)";
       container.style.margin = "1rem auto 2rem";

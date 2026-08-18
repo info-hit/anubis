@@ -6,20 +6,21 @@ import (
 )
 
 templ page(localizer *localization.SimpleLocalizer) {
-	<div class="centered-div">
-		<img id="image" style="width:100%;max-width:256px;" src={ anubis.BasePrefix + "/.within.website/x/cmd/anubis/static/img/pensive.webp?cacheBuster=" + anubis.Version }/>
-		<img style="display:none;" style="width:100%;max-width:256px;" src={ anubis.BasePrefix + "/.within.website/x/cmd/anubis/static/img/happy.webp?cacheBuster=" + anubis.Version }/>
-		<p id="status">{ localizer.T("loading") }</p>
-		<p id="anubis-script-error" style="display:none;">{ localizer.T("script_load_error") }</p>
+	<div class="challenge-content centered-div">
+		<img id="image" class="challenge-mascot" alt="" src={ anubis.BasePrefix + "/.within.website/x/cmd/anubis/static/img/pensive.webp?cacheBuster=" + anubis.Version }/>
+		<img class="challenge-mascot" alt="" src={ anubis.BasePrefix + "/.within.website/x/cmd/anubis/static/img/happy.webp?cacheBuster=" + anubis.Version }/>
+		<p id="status" aria-live="polite">{ localizer.T("loading") }</p>
+		<p id="anubis-script-error" role="alert" style="display:none;">{ localizer.T("script_load_error") }</p>
 		<script id="anubis-main" defer type="module" src={ anubis.BasePrefix + "/.within.website/x/cmd/anubis/static/js/main.mjs?cacheBuster=" + anubis.Version }></script>
 		@bootstrap()
 		<div id="progress" role="progressbar" aria-labelledby="status">
 			<div class="bar-inner"></div>
 		</div>
-		<details>
+		<details class="challenge-details">
+			<summary>{ localizer.T("why_am_i_seeing") }</summary>
 			if anubis.UseSimplifiedExplanation {
 				<p>
-					{ localizer.T("simplified_explanation") }
+					@templ.Raw(localizer.T("simplified_explanation"))
 				</p>
 			} else {
 				<p>
