@@ -1,0 +1,14 @@
+package web
+
+import "github.com/TecharoHQ/anubis/lib/localization"
+
+templ ChallengeRecovery(message, retryURL string, localizer *localization.SimpleLocalizer) {
+	<div class="challenge-content centered-div">
+		<p>{ message }</p>
+		if retryURL != "" {
+			<p><a id="anubis-retry" href={ templ.SafeURL(retryURL) }>{ localizer.T("try_again") }</a></p>
+		} else {
+			<p>{ localizer.T("verification_return_to_site") }</p>
+		}
+	</div>
+}

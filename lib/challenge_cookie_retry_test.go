@@ -89,14 +89,14 @@ func TestPassChallengeMissingVerificationCookie(t *testing.T) {
 		{
 			name: "unknown challenge is not retried",
 			steps: []step{
-				{id: "not-a-challenge", wantStatus: http.StatusInternalServerError},
+				{id: "not-a-challenge", wantStatus: http.StatusGone},
 			},
 		},
 		{
 			name: "spent challenge is not retried",
 			steps: []step{
 				{withCookie: true, wantStatus: http.StatusFound, wantAuth: true},
-				{reuse: true, wantStatus: http.StatusInternalServerError},
+				{reuse: true, wantStatus: http.StatusConflict},
 			},
 		},
 	} {

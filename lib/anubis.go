@@ -636,19 +636,6 @@ func (s *Server) PassChallenge(w http.ResponseWriter, r *http.Request) {
 		cookiePath = strings.TrimSuffix(anubis.BasePrefix, "/") + "/"
 	}
 
-	if _, err := s.getCookie(r, anubis.TestCookieName); errors.Is(err, http.ErrNoCookie) {
-		s.ClearCookie(w, CookieOpts{Path: cookiePath, Host: r.Host})
-		s.ClearCookie(w, CookieOpts{Name: anubis.TestCookieName, Host: r.Host})
-		if s.shouldRetryMissingTestCookie(r) {
-			lg.DebugContext(r.Context(), "verification cookie missing, retrying with a fresh challenge")
-			http.Redirect(w, r, redir, http.StatusFound)
-			return
-		}
-		lg.WarnContext(r.Context(), "user has cookies disabled, this is not an anubis bug")
-		s.respondWithError(w, r, localizer.T("cookies_disabled"), "")
-		return
-	}
-
 	// used by the path checker rule
 	r.URL = redirURL
 
@@ -666,6 +653,11 @@ func (s *Server) PassChallenge(w http.ResponseWriter, r *http.Request) {
 	defer lock.Unlock()
 
 	chall, err := s.getChallenge(r)
+	if errors.Is(err, store.ErrNotFound) {
+		lg.InfoContext(r.Context(), "challenge unavailable", "reason", "unavailable")
+		s.respondWithChallengeRecovery(w, r, redirURL, "unavailable", http.StatusGone)
+		return
+	}
 	if err != nil {
 		lg.ErrorContext(r.Context(), "getChallenge failed", "err", err)
 		s.respondWithError(w, r, fmt.Sprintf("%s: %s", localizer.T("internal_server_error"), "getChallenge failed"), makeCode(err))
@@ -673,8 +665,21 @@ func (s *Server) PassChallenge(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if chall.Spent {
-		lg.ErrorContext(r.Context(), "double spend prevented", "reason", "double_spend")
-		s.respondWithError(w, r, fmt.Sprintf("%s: %s", localizer.T("internal_server_error"), "double_spend"), "")
+		lg.InfoContext(r.Context(), "double spend prevented", "reason", "double_spend")
+		s.respondWithChallengeRecovery(w, r, redirURL, "double_spend", http.StatusConflict)
+		return
+	}
+
+	if _, err := s.getCookie(r, anubis.TestCookieName); errors.Is(err, http.ErrNoCookie) {
+		s.ClearCookie(w, CookieOpts{Path: cookiePath, Host: r.Host})
+		s.ClearCookie(w, CookieOpts{Name: anubis.TestCookieName, Host: r.Host})
+		if s.shouldRetryMissingTestCookie(r) {
+			lg.DebugContext(r.Context(), "verification cookie missing, retrying with a fresh challenge")
+			http.Redirect(w, r, redir, http.StatusFound)
+			return
+		}
+		lg.WarnContext(r.Context(), "user has cookies disabled, this is not an anubis bug")
+		s.respondWithError(w, r, localizer.T("cookies_disabled"), "")
 		return
 	}
 
@@ -746,7 +751,7 @@ func (s *Server) PassChallenge(w http.ResponseWriter, r *http.Request) {
 	chall.Spent = true
 	j := store.JSON[challenge.Challenge]{Underlying: s.store}
 	if err := j.Set(r.Context(), "challenge:"+chall.ID, *chall, 30*time.Minute); err != nil {
-		lg.DebugContext(r.Context(), "can't update information about challenge", "err", err)
+		lg.ErrorContext(r.Context(), "can't update information about challenge", "err", err)
 		s.respondWithError(w, r, localizer.T("internal_server_error"), makeCode(err))
 		return
 	}

@@ -60,5 +60,9 @@
   "js_calculation_error_msg": "Falha ao calcular a validação:",
   "missing_required_forwarded_headers": "Faltam os cabeçalhos X-Forwarded-* obrigatórios",
   "simplified_explanation": "Esta é uma medida contra bots e solicitações maliciosas, semelhante a um CAPTCHA. No entanto, em vez de você mesmo ter que fazer o trabalho, seu navegador recebe uma tarefa de cálculo que ele deve resolver para garantir que seja um cliente válido. Esse conceito é chamado de <a href=\"https://en.wikipedia.org/wiki/Proof_of_work\">Prova de Trabalho</a>. A tarefa é calculada em poucos segundos e você tem acesso ao site. Obrigado pela sua compreensão e paciência.",
-  "script_load_error": "O Anubis não conseguiu carregar seu JavaScript. O servidor pode estar sobrecarregado. Por favor, recarregue a página para tentar novamente."
+  "script_load_error": "O Anubis não conseguiu carregar seu JavaScript. O servidor pode estar sobrecarregado. Por favor, recarregue a página para tentar novamente.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

@@ -60,5 +60,9 @@
   "js_finished_reading": "Eg har lese ferdig, haldt fram →",
   "js_calculation_error": "Reknefeil!",
   "js_calculation_error_msg": "Fekk ikkje rekna ut utfordringa:",
-  "script_load_error": "Anubis fekk ikkje lasta inn JavaScriptet sitt. Det kan henda tenaren har for mykje å gjera. Last inn sida på nytt og freist omatt."
+  "script_load_error": "Anubis fekk ikkje lasta inn JavaScriptet sitt. Det kan henda tenaren har for mykje å gjera. Last inn sida på nytt og freist omatt.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

@@ -60,5 +60,9 @@
   "js_finished_reading": "I've finished reading, continue →",
   "js_calculation_error": "Calculation error!",
   "js_calculation_error_msg": "Failed to calculate challenge:",
-  "script_load_error": "Anubis could not load its JavaScript. The server may be overloaded. Please reload the page to try again."
+  "script_load_error": "Anubis could not load its JavaScript. The server may be overloaded. Please reload the page to try again.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

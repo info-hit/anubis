@@ -58,5 +58,9 @@
   "js_finished_reading": "อ่านจบแล้ว ดำเนินการต่อ →",
   "js_calculation_error": "เกิดข้อผิดพลาดในการคำนวณ!",
   "js_calculation_error_msg": "ไม่สามารถคำนวณการท้าทายได้:",
-  "script_load_error": "Anubis ไม่สามารถโหลด JavaScript ได้ เซิร์ฟเวอร์อาจมีภาระงานหนักเกินไป กรุณาโหลดหน้านี้ใหม่เพื่อลองอีกครั้ง"
+  "script_load_error": "Anubis ไม่สามารถโหลด JavaScript ได้ เซิร์ฟเวอร์อาจมีภาระงานหนักเกินไป กรุณาโหลดหน้านี้ใหม่เพื่อลองอีกครั้ง",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

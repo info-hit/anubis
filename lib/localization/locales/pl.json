@@ -60,5 +60,9 @@
   "js_finished_reading": "Skończyłem czytać, kontynuuj →",
   "js_calculation_error": "Błąd obliczeń!",
   "js_calculation_error_msg": "Nie udało się obliczyć zadania:",
-  "script_load_error": "Anubis nie mógł wczytać swojego kodu JavaScript. Serwer może być przeciążony. Odśwież stronę, aby spróbować ponownie."
+  "script_load_error": "Anubis nie mógł wczytać swojego kodu JavaScript. Serwer może być przeciążony. Odśwież stronę, aby spróbować ponownie.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

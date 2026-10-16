@@ -60,5 +60,9 @@
   "js_finished_reading": "Tôi đã đọc xong, tiếp tục →",
   "js_calculation_error": "Lỗi tính toán!",
   "js_calculation_error_msg": "Không thể tính toán thử thách:",
-  "script_load_error": "Anubis không thể tải JavaScript của mình. Máy chủ có thể đang quá tải. Vui lòng tải lại trang để thử lại."
+  "script_load_error": "Anubis không thể tải JavaScript của mình. Máy chủ có thể đang quá tải. Vui lòng tải lại trang để thử lại.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

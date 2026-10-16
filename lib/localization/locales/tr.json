@@ -60,5 +60,9 @@
   "js_calculation_error_msg": "Zorluk hesaplaması başarısız oldu:",
   "missing_required_forwarded_headers": "Gerekli X-Forwarded-* başlıkları eksik",
   "simplified_explanation": "Bu, botlara ve kötü niyetli isteklere karşı CAPTCHA'ya benzer bir önlemdir. Ancak, kendiniz çalışmak yerine, tarayıcınıza geçerli bir istemci olduğundan emin olmak için çözmesi gereken bir hesaplama görevi verilir. Bu kavrama <a href=\"https://en.wikipedia.org/wiki/Proof_of_work\">İş Kanıtı</a> denir. Görev birkaç saniye içinde hesaplanır ve web sitesine erişim hakkı kazanırsınız. Anlayışınız ve sabrınız için teşekkür ederiz.",
-  "script_load_error": "Anubis, JavaScript dosyasını yükleyemedi. Sunucu aşırı yüklenmiş olabilir. Lütfen tekrar denemek için sayfayı yeniden yükleyin."
+  "script_load_error": "Anubis, JavaScript dosyasını yükleyemedi. Sunucu aşırı yüklenmiş olabilir. Lütfen tekrar denemek için sayfayı yeniden yükleyin.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

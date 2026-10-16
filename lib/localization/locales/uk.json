@@ -60,5 +60,9 @@
   "js_finished_reading": "Читання завершено, продовжити →",
   "js_calculation_error": "Помилка обчислення!",
   "js_calculation_error_msg": "Не вдалося обчислити перевірку:",
-  "script_load_error": "Anubis не зміг завантажити свій JavaScript. Можливо, сервер перевантажено. Будь ласка, оновіть сторінку, щоб спробувати ще раз."
+  "script_load_error": "Anubis не зміг завантажити свій JavaScript. Можливо, сервер перевантажено. Будь ласка, оновіть сторінку, щоб спробувати ще раз.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

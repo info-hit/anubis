@@ -37,6 +37,7 @@ func TestChallengeSpendIsExclusive(t *testing.T) {
 		t.Fatal(err)
 	}
 	var accepted atomic.Int32
+	var rejected atomic.Int32
 	var wg sync.WaitGroup
 	gate := make(chan struct{})
 	for range 32 {
@@ -47,13 +48,18 @@ func TestChallengeSpendIsExclusive(t *testing.T) {
 			req.AddCookie(&http.Cookie{Name: srv.cookieName(anubis.TestCookieName), Value: c.ID})
 			rec := httptest.NewRecorder()
 			srv.PassChallenge(rec, req)
-			if authCookie(srv, rec.Result()) != nil {
+			if authCookie(srv, rec.Result()) != nil && rec.Code == http.StatusFound {
 				accepted.Add(1)
+			} else if authCookie(srv, rec.Result()) == nil && rec.Code == http.StatusConflict {
+				rejected.Add(1)
 			}
 		})
 	}
 	close(gate)
 	wg.Wait()
+	if got := rejected.Load(); got != 31 {
+		t.Fatalf("expected 31 replay conflicts, got %d", got)
+	}
 	if got := accepted.Load(); got != 1 {
 		t.Fatalf("challenge minted %d cookies", got)
 	}

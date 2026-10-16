@@ -61,5 +61,9 @@
   "js_calculation_error": "Skaičiavimo klaida!",
   "js_calculation_error_msg": "Nepavyko įveikti iššūkio:",
   "missing_required_forwarded_headers": "Trūksta privalomų X-Forwarded-* antraščių",
-  "script_load_error": "Nepavyko įkelti „Anubis“ naudojamo „JavaScript“ kodo. Tikėtina, jog serveris yra perkrautas. Prašom įkelti tinklalapį iš naujo ir bandyti dar kartą."
+  "script_load_error": "Nepavyko įkelti „Anubis“ naudojamo „JavaScript“ kodo. Tikėtina, jog serveris yra perkrautas. Prašom įkelti tinklalapį iš naujo ir bandyti dar kartą.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }

@@ -60,5 +60,9 @@
   "js_finished_reading": "Irakurtzen amaitu dut, jarraitu →",
   "js_calculation_error": "Kalkulu-errorea!",
   "js_calculation_error_msg": "Huts egin du erronka kalkulatzeak:",
-  "script_load_error": "Anubisek ezin izan du bere JavaScripta kargatu. Zerbitzaria gainkargatuta egon daiteke. Berriro kargatu orria berriro saiatzeko."
+  "script_load_error": "Anubisek ezin izan du bere JavaScripta kargatu. Zerbitzaria gainkargatuta egon daiteke. Berriro kargatu orria berriro saiatzeko.",
+  "verification_restart_title": "Please restart verification",
+  "verification_double_spend": "This verification has already been used. Return to the page to continue or start a new verification.",
+  "verification_unavailable": "This verification has expired or is no longer available. Return to the page to start again.",
+  "verification_return_to_site": "Return to the original website and start a new verification."
 }
