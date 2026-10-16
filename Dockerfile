@@ -1,8 +1,16 @@
 FROM node:24-bookworm AS node
 
+FROM rust:1.99.0-bookworm AS rust
+RUN rustup target add wasm32-unknown-unknown
+
 FROM golang:1.26.3-bookworm AS build
 
 COPY --from=node /usr/local /usr/local
+COPY --from=rust /usr/local/rustup /usr/local/rustup
+COPY --from=rust /usr/local/cargo /usr/local/cargo
+ENV RUSTUP_HOME=/usr/local/rustup \
+    CARGO_HOME=/usr/local/cargo \
+    PATH=/usr/local/cargo/bin:$PATH
 
 RUN apt-get update \
     && apt-get install --no-install-recommends --yes brotli zstd \
@@ -12,7 +20,7 @@ WORKDIR /src
 
 COPY go.mod go.sum ./
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 RUN go mod download
 

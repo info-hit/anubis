@@ -4,8 +4,42 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"strings"
 	"testing"
 )
+
+func TestMetricsHealthURL(t *testing.T) {
+	tests := []struct {
+		name    string
+		bind    string
+		network string
+		want    string
+		wantErr string
+	}{
+		{name: "default bind", bind: ":9090", network: "tcp", want: "http://localhost:9090/healthz"},
+		{name: "loopback bind", bind: "127.0.0.1:9090", network: "tcp", want: "http://127.0.0.1:9090/healthz"},
+		{name: "ipv6 loopback bind", bind: "[::1]:9090", network: "tcp6", want: "http://[::1]:9090/healthz"},
+		{name: "unix socket", bind: "/tmp/anubis-metrics.sock", network: "unix", wantErr: "unix metrics sockets"},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := metricsHealthURL(tt.bind, tt.network)
+			if tt.wantErr != "" {
+				if err == nil || !strings.Contains(err.Error(), tt.wantErr) {
+					t.Fatalf("metricsHealthURL error: got %v, want substring %q", err, tt.wantErr)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatalf("metricsHealthURL: %v", err)
+			}
+			if got != tt.want {
+				t.Fatalf("metricsHealthURL: got %q, want %q", got, tt.want)
+			}
+		})
+	}
+}
 
 func TestMakeReverseProxy(t *testing.T) {
 	type received struct {
